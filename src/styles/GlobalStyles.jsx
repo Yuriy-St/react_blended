@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { theme } from 'styles/theme';
 
+
 export const GlobalStyles = css`
   html {
     box-sizing: border-box;
@@ -16,6 +17,8 @@ export const GlobalStyles = css`
     min-height: 100vh;
 
     font-style: normal;
+    box-sizing: border-box;
+
   }
 
   h1,

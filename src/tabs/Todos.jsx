@@ -1,4 +1,4 @@
-import { Grid, GridItem, AddTodoForm, EditForm, Text, Todo } from 'components';
+import { Grid, GridItem, AddTodoForm, Todo } from 'components';
 import { useSelector } from 'react-redux';
 import { getTodos } from 'redux/selectors';
 
