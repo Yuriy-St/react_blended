@@ -1,9 +1,17 @@
-import { Component, useState } from 'react';
+import { useState } from 'react';
+import { addTodo } from 'redux/reducers';
 
 import { FiSearch } from 'react-icons/fi';
-import { FormBtn, InputSearch, SearchFormStyled } from './SearchForm.styled';
+import {
+  FormBtn,
+  InputSearch,
+  AddTodoFormStyled,
+} from '../AddTodoForm/AddTodoForm.styled';
+import { useDispatch } from 'react-redux';
+import { nanoid } from 'nanoid';
 
-export function SearchForm({ onSubmit }) {
+export function AddTodoForm() {
+  const dispatch = useDispatch();
   const [query, setQuery] = useState('');
   const handleQuery = e => {
     setQuery(e.target.value);
@@ -11,12 +19,12 @@ export function SearchForm({ onSubmit }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit(query);
+    dispatch(addTodo({ text: query, id: nanoid() }));
     setQuery('');
   };
 
   return (
-    <SearchFormStyled onSubmit={handleSubmit}>
+    <AddTodoFormStyled onSubmit={handleSubmit}>
       <InputSearch
         placeholder="What do you whant to write?"
         value={query}
@@ -25,6 +33,6 @@ export function SearchForm({ onSubmit }) {
       <FormBtn type="submit">
         <FiSearch />
       </FormBtn>
-    </SearchFormStyled>
+    </AddTodoFormStyled>
   );
 }
