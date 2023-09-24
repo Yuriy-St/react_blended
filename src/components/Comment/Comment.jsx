@@ -2,9 +2,12 @@ import React from 'react';
 import styles from './Comment.module.css';
 import PropTypes from 'prop-types';
 import { TiThumbsUp, TiThumbsDown } from 'react-icons/ti';
-import { formatDateToNow } from '../../helpers/formatDateToNow';
-import { Button } from '../Button/Button';
-import { useUpdateCommentMutation } from '../../redux/commentApi';
+import { formatDateToNow } from '@/helpers/formatDateToNow';
+import { Button } from '@/components/Button/Button';
+import {
+  useDeleteCommentMutation,
+  useUpdateCommentMutation,
+} from '@/redux/commentApi';
 
 export const Comment = ({
   createdAt,
@@ -16,8 +19,10 @@ export const Comment = ({
   id,
 }) => {
   const [updateComment, { isLoading }] = useUpdateCommentMutation();
-
-  const handleDelete = () => {};
+  const [deleteComment] = useDeleteCommentMutation();
+  const handleDelete = () => {
+    deleteComment(id);
+  };
 
   const handleEdit = () => {
     const newContent = prompt('Input new content');
