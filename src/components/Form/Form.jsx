@@ -1,19 +1,34 @@
 import React, { useState } from 'react';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { BiMailSend } from 'react-icons/bi';
 import styles from './Form.module.css';
+import { useAddPostMutation } from '../../redux/commentApi';
 
 export const Form = () => {
   const [author, setAuthor] = useState('');
   const [content, setContent] = useState('');
+  const [addComment, {isLoading, isSuccess, isError}] = useAddPostMutation();
 
   const onHandleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
+    switch (name) {
+      case 'name':
+        setAuthor(value);
+        break;
+      case 'text':
+        setContent(value);
+        break;
+
+      default:
+        break;
+    }
   };
+
+  const handleSuccess = () => { toast('Comment successfully added!') };
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
+    addComment({ author, content });
 
     setAuthor('');
     setContent('');
@@ -49,6 +64,8 @@ export const Form = () => {
           Send
         </button>
       </form>
+      <Toaster />
+      {isSuccess && handleSuccess()}
     </div>
   );
 };
