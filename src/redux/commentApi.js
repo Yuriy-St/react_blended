@@ -35,4 +35,5 @@ export const commentApi = createApi({
     }),
   }),
 });
-export const { useGetPostQuery, useAddPostMutation, useUpdateCommentMutation } = commentApi;
+export const { useGetPostQuery, useAddPostMutation, useUpdateCommentMutation } =
+  commentApi;
